@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h5 style="float:right;">Welcome <strong style="color:blue;">{{user}}</strong></h5>
+	<div class="container">
+	<div class="row" style="margin-bottom:2%; margin-top:4%;">
+
+		<div class="col-md-10 col-lg-10">
+			<input type="text" class="datame form-control input-large search-query" placeholder="Search for the artist" style="height:47px; width:100%; border-radius:3px;"> 
+		</div>
+		<div class="col-md-2 col-lg-2">
+			<input type="button" class="btn btn-info btn-lg search"  value="Search"> 
+		</div>
+	</div>
+	<div class="row " id="artist"> </div>
+</div>
+
+
+
+
+{% endblock %}

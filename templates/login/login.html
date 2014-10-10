@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+		{% block title %}
+			<title>User_Login</title>
+		{% endblock %}
+
+
+{% block content %}
+<style>
+.login_container{
+	
+	width: 700px;
+        clear: both;
+    }
+    .container input {
+        width: 25%;
+        clear: both;
+}
+
+</style>
+
+ <link href="media/css/bootstrap.min.css"
+          rel="stylesheet">
+      
+
+        <!-- Services -->
+        <div class="login_container container">
+            <div class="row">
+                 <div class="header row">
+                <div class="span15">
+                    <div class="navbar">
+						
+					</div>
+				</div>
+			</div>
+                <div class="login span3">
+                   
+	                   {% if user.is_authenticated%}
+	                    <h4 style="color:red;">Logged in as : 
+			                   	{{ user.username }}	                   	                  
+			               </h4><br /><br />
+			               
+			            
+			               
+			               
+			              <a href="/login/out/"  original-title="logout" style="height:25px; color:green;"><img src="/media/icon/logout1.png"  alt="facebook" width="60" height="80"></a>
+	               
+	                   {% else%}
+                   
+    <br><br><br><br>    <img src="/media/img/logo.png" height="80" width="200"/><br><br><br>  
+	
+	<form  class="container" action="." method="POST" style="padding: 10px;" align="left">{% csrf_token %}
+ <h4>Sign In</h4>
+ {% for fields in form3 %}
+	<br>{{ fields}}
+	
+ {% endfor %}<br>
+</br>
+ <button id="btn-green" class="btn btn-success"  type="submit">Sign in</button>
+
+   </form>
+				  
+				   {% endif %}
+                </div>
+            </div>
+        </div>
+		
+		
+{% endblock %}

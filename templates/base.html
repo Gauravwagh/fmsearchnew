@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="utf-8">
+
+    <title>The DO Revolution</title>
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    
+
+    <link href="/media/js/google-code-prettify/prettify.css" rel="stylesheet">
+	<link href="/media/css/font-awesome.min.css" rel="stylesheet">
+	<link href="/media/css/jquery.share.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="/media/css/jquery.datetimepicker.css"/>
+
+    <link href="/media/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans:700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans+Caption' rel='stylesheet' type='text/css'>
+	
+	
+<style>
+#id_location {
+	height:42px;	
+}
+#id_cleanup_event_date {
+	height:42px;	
+}
+#id_no_of_volunteers_needed {
+	height:42px;	
+}
+#id_description{
+	height:42px;	
+}
+
+
+div.main {
+	
+	
+	border: 1px solid #ccc;
+	padding: 1%;
+	}
+
+div.main:hover {
+	-moz-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 0 5px rgba(0,0,0,0.5);
+	box-shadow: 0 0 5px rgba(0,0,0,0.5);
+	}
+	.datanew
+	{
+		
+		min-height:200px;
+	}
+	img
+	{
+		height:100px !important;
+	}
+
+	div.datanew {
+	
+	
+	border: 1px solid #ccc;
+	padding: 1%;
+	}
+
+div.datanew:hover {
+	-moz-box-shadow: 0 0 10px rgba(0,0,0,0.9);
+	-webkit-box-shadow: 0 0 10px rgba(0,0,0,0.9);
+	box-shadow: 0 0 10px rgba(0,0,0,0.9);
+	}
+	.hidden
+	{
+		display:none;
+	}
+
+	.loading
+	{
+		position:fixed;
+		background-color:rgba(0,0,0,0.8);
+		width:100%;
+		height:100%;
+		top:0px;
+		left:0px;
+
+	}
+	.loading img
+		{
+			width:100px;
+			height:100px;
+			margin-left:50%;
+			margin-top:20%;
+			
+		}
+body{
+
+background: rgba(212,228,239,1);
+background: -moz-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(134,174,204,1) 100%);
+background: -webkit-gradient(left top, right top, color-stop(0%, rgba(212,228,239,1)), color-stop(100%, rgba(134,174,204,1)));
+background: -webkit-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(134,174,204,1) 100%);
+background: -o-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(134,174,204,1) 100%);
+background: -ms-linear-gradient(left, rgba(212,228,239,1) 0%, rgba(134,174,204,1) 100%);
+background: linear-gradient(to right, rgba(212,228,239,1) 0%, rgba(134,174,204,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4e4ef', endColorstr='#86aecc', GradientType=1 );
+}
+</style>
+</head>
+{% block background %}
+<body style="background-color:#F7F7F7; ">
+<div class="container">
+
+<div class="loading hidden" ><img src="/media/img/load.gif" width="100" height="100"></div>
+
+
+
+{% block content %}
+
+{% endblock %}
+
+</div>
+
+<script src="/media/js/jquery.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="/media/js/bootstrap.js"></script>
+    <script src="/media/js/fancySelect.js"></script>
+     <script src="/media/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <script src="/media/js/Gruntfile.js"></script>
+	<script src="/media/js/jquery.djangocsrf.js"></script>
+	<script src="/media/js/jquery-ui-timepicker-addon.js"></script>
+  
+  <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
+  <script type="text/javascript" src="/media/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="/media/js/bootstrap-datetimepicker.fr.js" charset="UTF-8"></script>
+
+<script>
+
+
+		$(function() {
+
+									
+
+									$.ajax({
+											url: "/facebook/history/",
+											type: "GET",
+											datatype: 'json',
+											success: function(response){
+												$(".loading").addClass('hidden');
+												var c = response.results;
+															
+												var res = c.artistmatches.artist;
+												var html_all = new Array();
+												var prev='<h3>Previously you searched for </h3>';
+												html_all.push(prev);
+												for(var i=0;i<res.length;i++){
+													var name = res[i].name;
+													var profile = res[i].url;
+													var image = res[i].image[2];
+													var image_url = new Array();
+													$.each(image, function (key, data) {
+															console.log(data);
+																image_url.push(data);
+														})
+												var listeners = res[i].listeners;
+												var mbid = res[i].mbid;
+
+												var html='<a href="'+profile+'" target="_blank">\
+												<div class="col-md-4 col-xs-6 col-lg-4 text-center datanew">\
+											<div clas="md-10">\
+												<h4>'+name+'</h4>\
+												</div>\
+												<div class="col-md-6"><img class="img-responsive" src="'+image_url[0]+'" >\
+												</div>\
+												<div class="col-md-6" style="float-left;"><br/><br/><br/></br/><strong>listeners: </strong>'+listeners+'</div></div></a>'
+												
+												html_all.push(html);
+												}
+												$('#artist').html(html_all);
+												},
+											error:function(){
+																$(".loading").addClass('hidden');
+															}
+									});	
+					//---------- Searching the artist
+							$(document).on('click','.search',function(){
+														
+														var id = $(".datame").val();
+														
+														
+
+														var data = {
+																
+																id:id
+																
+															};
+															$(".loading").removeClass('hidden');
+															
+															$.ajax({
+																url:"/facebook/search/",
+																type: "POST",
+																data: data,
+																
+																success:function(response){
+																	$(".loading").addClass('hidden');
+																	
+																		var c = response.results;
+																	
+																		var res = c.artistmatches.artist;
+																		var html_all = new Array();
+																		for(var i=0;i<res.length;i++){
+																			var name = res[i].name;
+																			var profile = res[i].url;
+																			var image = res[i].image[2];
+																			var image_url = new Array();
+																			$.each(image, function (key, data) {
+																					console.log(data);
+																						image_url.push(data);
+																				})
+																		var listeners = res[i].listeners;
+																		var mbid = res[i].mbid;
+
+																		var html='<a href="'+profile+'" target="_blank">\
+																		<div class="col-md-4 col-xs-6 col-lg-4 text-center datanew">\
+																	<div clas="md-10">\
+																		<h4>'+name+'</h4>\
+																		</div>\
+																		<div class="col-md-6"><img class="img-responsive" src="'+image_url[0]+'" >\
+																		</div>\
+																		<div class="col-md-6" style="float-left;"><br/><br/><br/></br/><strong>listeners: </strong>'+listeners+'</div></div></a>'
+																		html_all.push(html);
+																		
+
+																		}
+																		$('#artist').html(html_all);
+																				},
+																	error: function () {
+																					$(".loading").addClass('hidden');
+																					}
+															});
+
+												});
+	});
+</script>
+
+</body>
+{% endblock %}
+
+
+
+
+
+</html>
+

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<p>Welcome {{ user }}. {% trans "Your account is now activated." %}</p>
+
+<!-- Latest Work -->
+        {% if user.is_authenticated %}
+			
+			<h3 style="position:absolute; top:25px; left:75%; color:white;">Welcome {{user}}</h3>
+			<form action="/accounts/logout/">
+			<input type="submit" value="Logout" class="btn btn-info" style="position:absolute; top:25px; left:87%;">
+			</form>
+		
+		{% else %}
+
+				<form action="/accounts/register/">
+				
+				<input type="submit" value="Register" class="btn btn-info" style="position:absolute; top:25px; left:81%; ">
+				</form>
+			<form action="/accounts/login/">
+			
+			<input type="submit" value="Login" class="btn btn-info" style="position:absolute; top:25px; left:87%;">
+			</form>
+			
+		{% endif %}
+                <div align="center" style="position:absolute; top:133px; left:30%;">
+                   <a href="/home/display/"> <img src="/media/img/map.png" alt=""></a>
+                    <h4>Page Management System</h4>
+					
+                </div>
+				
+                <div align="center" style="position:absolute; top:133px; left:60%;">
+                   <a href="/home/displaypm/"> <img src="/media/img/book.png" alt=""></a>
+                    <h4>Project Management System</h4>
+					               
+                </div>
+              
+               
+            
+        </div>
+	
+
+{% endblock %}
