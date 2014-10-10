@@ -157,6 +157,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4e4ef', end
 											datatype: 'json',
 											success: function(response){
 												$(".loading").addClass('hidden');
+												
+												len = response.message
+												
+												//alert(response);
+												if (len=="No history available")
+												{
+													$('#artist').html('<h4 style="color:red;">No History is available for you, you searching the artist first time</h4>');
+												}
 												var c = response.results;
 															
 												var res = c.artistmatches.artist;

@@ -1,4 +1,3 @@
-# Create your views here.
 from django.shortcuts import render
 from django.shortcuts import render_to_response, HttpResponseRedirect, HttpResponse
 from django.contrib import messages
@@ -73,13 +72,21 @@ def artist_search(request):
 @csrf_exempt
 def history(request):
 	his = History.objects.filter(person=request.user).order_by('-created_date')
-	for h in his:
-		artist_name = h.artist_name
-		api_url = 'http://ws.audioscrobbler.com/2.0/'
-		api_key = 'c712f60d8d4eea6536a59d62a88d4dd7'
-		url = api_url+'?method=artist.search&format=json&artist='+artist_name+'&api_key='+api_key
-		response = urllib.urlopen(url)
-		data = json.loads(response.read())
-		print data
+	print his
+	if not his:
+		print "Gaurav"
+		data={"message":"No history available"}
 		response = json.dumps(data)
 		return HttpResponse(response, mimetype="application/json")
+	else:
+		for h in his:
+			artist_name = h.artist_name
+			print artist_name
+			api_url = 'http://ws.audioscrobbler.com/2.0/'
+			api_key = 'c712f60d8d4eea6536a59d62a88d4dd7'
+			url = api_url+'?method=artist.search&format=json&artist='+artist_name+'&api_key='+api_key
+			response = urllib.urlopen(url)
+			data = json.loads(response.read())
+			print data
+			response = json.dumps(data)
+			return HttpResponse(response, mimetype="application/json")
